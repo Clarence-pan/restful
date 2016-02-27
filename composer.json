@@ -1,0 +1,28 @@
+{
+  "name": "clarence/restful",
+  "type": "library",
+  "description": "A RESTful client, especially for async requests.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Clarence Pan",
+      "email": "clarence-pan@foxmail.com",
+      "homepage": "https://clarence-pan.github.io",
+      "role": "developer"
+    }
+  ],
+  "require": {
+    "php": "^5.5",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Clarence\\Restful\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Clarence\\Restful\\Test\\": "tests"
+    }
+  }
+}
