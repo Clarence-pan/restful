@@ -12,7 +12,7 @@ use Clarence\Restful\Response;
 
 class RestClientTest extends \PHPUnit_Framework_TestCase
 {
-    const BASE_URL = 'http://localhost:8888/server/';
+    const BASE_URL = 'http://localhost:8888/server';
 
 //    public function setup()
 //    {
@@ -30,6 +30,24 @@ class RestClientTest extends \PHPUnit_Framework_TestCase
 //        }
 //    }
 
+    public function test_Sample()
+    {
+        $restClient = new CurlRestClient();
+
+        $data = ['test' => 'test', 'hello' => 'world!', 'special' => '@ # $!%^&*(),./;\'"[]-='];
+
+        $jsonResponse = $restClient->get('http://localhost:8888/server/echo-globals.php', $data)->json();
+        $this->assertEquals($jsonResponse['_GET'], $data);
+
+        $jsonResponse = $restClient->post('http://localhost:8888/server/echo-globals.php', $data)->json();
+        $this->assertEquals($jsonResponse['_POST'], $data);
+
+        $jsonResponse = $restClient->put('http://localhost:8888/server/echo-globals.php', $data)->json();
+        $this->assertEquals($jsonResponse['_POST'], $data);
+
+        $jsonResponse = $restClient->delete('http://localhost:8888/server/echo-globals.php', $data)->json();
+        $this->assertEquals($jsonResponse['_POST'], $data);
+    }
 
     protected function _test_request($method, $options = [])
     {
