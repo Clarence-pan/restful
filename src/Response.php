@@ -28,4 +28,8 @@ interface Response
      */
     public function json($assoc=true);
 
+    /**
+     * @return mixed 返回调试信息
+     */
+    public function debugInfo();
 }

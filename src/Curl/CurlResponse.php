@@ -29,6 +29,16 @@ class CurlResponse implements Response
         $this->curl = $curl;
     }
 
+    public function getRequestMethod()
+    {
+        return $this->request->getMethod();
+    }
+
+    public function getRequestFinalUrl()
+    {
+        return $this->curl->getUrl();
+    }
+
     /**
      * 应答的内容
      *
@@ -36,7 +46,7 @@ class CurlResponse implements Response
      */
     public function content()
     {
-        return $this->raw();
+        return $this->curl->getContent();
     }
 
     /**
@@ -47,6 +57,22 @@ class CurlResponse implements Response
     public function raw()
     {
         return $this->curl->getContent();
+    }
+
+    public function debugInfo()
+    {
+        $info = $this->curl->info();
+        $debugInfo = [];
+        $debugInfo['response'] = $this->curl->getContent();
+        $debugInfo['request'] = [
+            'method' => $this->request->getMethod(),
+            'uri' => $this->request->getUri(),
+            'post_data' => $this->request->getPostData(),
+        ];
+        $debugInfo['errno'] = $this->curl->errno();
+        $debugInfo['error'] = $this->curl->error();
+        $debugInfo['ext_info'] = $info;
+        return $debugInfo;
     }
 
     /**

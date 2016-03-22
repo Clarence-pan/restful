@@ -12,6 +12,7 @@ class Curl
 {
     protected $url;
     protected $handle;
+    protected $responseContent;
 
     public function __construct($url)
     {
@@ -41,7 +42,7 @@ class Curl
     public function setOpt($opt, $val = null)
     {
         if (is_array($opt)) {
-            $this->setOptArray($opt);
+            return $this->setOptArray($opt);
         }
 
         if ($opt == CURLOPT_URL){
@@ -77,7 +78,16 @@ class Curl
 
     public function exec()
     {
-        return curl_exec($this->handle);
+        return $this->responseContent = curl_exec($this->handle);
+    }
+
+    public function info($opt=null)
+    {
+        if (!is_null($opt)){
+            return curl_getinfo($this->handle, $opt);
+        } else {
+            return curl_getinfo($this->handle);
+        }
     }
 
     public function getHandle()
@@ -91,6 +101,10 @@ class Curl
      */
     public function getContent()
     {
+        if (isset($this->responseContent)){
+            return $this->responseContent;
+        }
+
         return curl_multi_getcontent($this->handle);
     }
 
