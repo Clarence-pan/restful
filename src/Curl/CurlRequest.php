@@ -66,9 +66,11 @@ class CurlRequest implements Request
         $curlOptions = [
             CURLOPT_HEADER => 0,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => $restClientOptions[RestClient::OPT_TIMEOUT],
+            CURLOPT_TIMEOUT => isset($restClientOptions[RestClient::OPT_TIMEOUT]) ? $restClientOptions[RestClient::OPT_TIMEOUT] : 10,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_FOLLOWLOCATION => !empty($restClientOptions[RestClient::OPT_MAX_REDIRS]),
+            CURLOPT_MAXREDIRS => isset($restClientOptions[RestClient::OPT_MAX_REDIRS]) ? $restClientOptions[RestClient::OPT_MAX_REDIRS] : 0,
         ];
 
         $data = is_array($data) ? http_build_query($data) : $data;

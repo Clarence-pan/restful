@@ -176,4 +176,19 @@ class RestClientTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('begin', $matchedLogs);
         $this->assertArrayHasKey('end', $matchedLogs);
     }
+
+    public function test_redirection()
+    {
+        $restClient = new CurlRestClient([RestClient::OPT_BASE_URL => self::BASE_URL]);
+
+        $data = ['testId' => 'test-' . time() . rand()];
+
+        $response = $restClient->get('/redirect.php', ['to' => '/server/echo-globals.php?'.http_build_query($data)]);
+        $this->assertInstanceOf(Response::class, $response);
+
+        $responseJson = $response->json();
+        $this->assertEquals('GET', $responseJson['_SERVER']['REQUEST_METHOD']);
+
+        $this->assertEquals($data, $responseJson['_GET']);
+    }
 }

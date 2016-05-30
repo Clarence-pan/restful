@@ -12,10 +12,11 @@ use \Clarence\Restful\Curl\CurlMulti;
  */
 abstract class RestClient
 {
-    const OPT_ASYNC = 'async';
-    const OPT_TIMEOUT = 'timeout';
-    const OPT_RESPONSE_DECODER = 'responseDecoder';
-    const OPT_BASE_URL = 'baseUrl';
+    const OPT_ASYNC = 'async';      // 是否是异步
+    const OPT_TIMEOUT = 'timeout';  // 超时时间 单位：秒
+    const OPT_RESPONSE_DECODER = 'responseDecoder'; // 解码器
+    const OPT_BASE_URL = 'baseUrl';         // 基础URL
+    const OPT_MAX_REDIRS = 'maxRedirs';     // 最大重定向次数
 
     protected $options;
 
@@ -144,10 +145,11 @@ abstract class RestClient
     public function getDefaultOptions()
     {
         return [
-            self::OPT_ASYNC => false,
+            self::OPT_ASYNC => false, // 默认非异步 -- 即同步模式
             self::OPT_TIMEOUT => 30, // 单位：秒
-            self::OPT_RESPONSE_DECODER => null,
-            self::OPT_BASE_URL => '',
+            self::OPT_RESPONSE_DECODER => null, // 默认无解码器
+            self::OPT_BASE_URL => '',  // 默认无基础URL
+            self::OPT_MAX_REDIRS => 3, // 最多3次跳转
         ];
     }
 
