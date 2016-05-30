@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cd `dirname $(realpath $0)`
+cd `dirname $0`
 php -S localhost:8888
