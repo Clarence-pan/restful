@@ -1,4 +1,5 @@
-# Restful
+# Restful 
+[![Build status](https://api.travis-ci.org/Clarence-pan/restful.svg?branch=master)](https://travis-ci.org/Clarence-pan/restful)
 
 A RESTful client, especially for async requests.
 
