@@ -73,6 +73,11 @@ class CurlRequest implements Request
             CURLOPT_MAXREDIRS => isset($restClientOptions[RestClient::OPT_MAX_REDIRS]) ? $restClientOptions[RestClient::OPT_MAX_REDIRS] : 0,
         ];
 
+        // CURLOPT_FOLLOWLOCATION cannot be activated when an open_basedir is set
+        if (ini_get('open_basedir')){
+            unset($curlOptions[CURLOPT_FOLLOWLOCATION]);
+        }
+
         $data = is_array($data) ? http_build_query($data) : $data;
         $dataLen = strlen($data);
 
