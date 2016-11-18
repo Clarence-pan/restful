@@ -59,6 +59,26 @@ class CurlResponse implements Response
         return $this->curl->getContent();
     }
 
+    /**
+     * 返回http状态码
+     * @return int|false
+     */
+    public function httpCode()
+    {
+        $httpCode = $this->curl->info(CURLINFO_HTTP_CODE);
+        return is_numeric($httpCode) ? intval($httpCode) : false;
+    }
+
+    public function errno()
+    {
+        return $this->curl->errno();
+    }
+
+    public function error()
+    {
+        return $this->curl->error();
+    }
+
     public function debugInfo()
     {
         $info = $this->curl->info();

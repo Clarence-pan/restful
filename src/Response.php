@@ -29,6 +29,24 @@ interface Response
     public function json($assoc=true);
 
     /**
+     * 返回http的错误码
+     * @return int|false
+     */
+    public function httpCode();
+
+    /**
+     * 返回错误码
+     * @return int
+     */
+    public function errno();
+
+    /**
+     * 返回错误信息
+     * @return string
+     */
+    public function error();
+
+    /**
      * @return mixed 返回调试信息
      */
     public function debugInfo();
