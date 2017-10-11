@@ -17,6 +17,14 @@ abstract class RestClient
     const OPT_RESPONSE_DECODER = 'responseDecoder'; // 解码器
     const OPT_BASE_URL = 'baseUrl';         // 基础URL
     const OPT_MAX_REDIRS = 'maxRedirs';     // 最大重定向次数
+    const OPT_ENCTYPE = 'enctype';          // 编码类型
+    const OPT_EXTRA_HEADERS = 'extraHeaders'; // 额外的HTTP头部
+
+    const ENCTYPE_FORM_URLENCODED = 'application/x-www-form-urlencoded';
+    const ENCTYPE_MULTIPART_FORMDATA = 'multipart/form-data';
+    const ENCTYPE_TEXT_PLAIN = 'text/plain';
+    const ENCTYPE_RAW = 'raw';
+    const ENCTYPE_JSON = 'application/json';
 
     protected $options;
 
@@ -150,6 +158,7 @@ abstract class RestClient
             self::OPT_RESPONSE_DECODER => null, // 默认无解码器
             self::OPT_BASE_URL => '',  // 默认无基础URL
             self::OPT_MAX_REDIRS => 3, // 最多3次跳转
+            self::OPT_ENCTYPE => self::ENCTYPE_FORM_URLENCODED,
         ];
     }
 
