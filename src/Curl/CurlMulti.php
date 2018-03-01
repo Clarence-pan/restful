@@ -248,6 +248,12 @@ class CurlMulti
         return null;
     }
 
+    /**@param $curl Curl */
+    public function remove($curl)
+    {
+        curl_multi_remove_handle($this->handle, $curl->getHandle());
+    }
+
     public function close()
     {
         if (!$this->handle){
